@@ -1,0 +1,99 @@
+{
+  "sdk": 3,
+  "version": 1,
+  "name": "Twitch Activity",
+  "id": "com.github.justcoderdev.twitchactivity",
+  "configuration": {
+    "colorLight": "#9256ED",
+    "colorDark": "#3C3C44"
+  },
+  "plugin_start_cmd": "%TP_PLUGIN_FOLDER%TwitchActivity\\index.exe",
+  "categories": [
+    {
+      "id": "com.github.justcoderdev.twitchactivity.cat",
+      "name": "Twitch Activity",
+      "imagepath": "%TP_PLUGIN_FOLDER%TwitchActivity\\logo.png",
+      "actions": [
+        {
+          "id": "com.github.justcoderdev.twitchactivity.act.refresh",
+          "prefix": " ",
+          "name": "Refresh",
+          "type": "communicate",
+          "description": "This action will refresh the channels states",
+          "tryInline": true
+        },
+        {
+          "id": "com.github.justcoderdev.twitchactivity.act.open_stream",
+          "prefix": " ",
+          "name": "Open stream",
+          "type": "communicate",
+          "description": "This action will open selected channel stream in browser",
+          "tryInline": true,
+          "data": [
+            {
+              "id": "com.github.justcoderdev.twitchactivity.data.channel",
+              "type": "text",
+              "label": "Channel name",
+              "default": "ImKibitz"
+            }
+          ],
+          "format": "Open {$com.github.justcoderdev.twitchactivity.data.channel$} stream"
+        }
+      ],
+      "events": [
+        {
+          "id": "com.github.justcoderdev.twitchactivity.event.on_refresh_state",
+          "name": "On refresh state",
+          "format": "On $val",
+          "type": "communicate",
+          "valueType": "choice",
+          "valueChoices": [
+            "refresh",
+            "idle",
+            "connection error"
+          ],
+          "valueStateId": "com.github.justcoderdev.twitchactivity.state.refresh_state"
+        }
+      ],
+      "states": [
+        {
+          "id": "com.github.justcoderdev.twitchactivity.state.refresh_state",
+          "type": "choice",
+          "desc": "Refresh state",
+          "default": "idle",
+          "valueChoices": [
+            "refresh",
+            "idle",
+            "connection error"
+          ]
+        },
+        {
+          "id": "com.github.justcoderdev.twitchactivity.state.time_until_refresh",
+          "type": "text",
+          "desc": "Time until refresh",
+          "default": "600"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "name": "Channel names",
+      "default": "MonikaCinnyRoll,xSgtPepperx",
+      "type": "text"
+    },
+    {
+      "name": "Refresh Time (m)",
+      "default": "10",
+      "type": "number",
+      "minValue": 1
+    },
+    {
+      "name": "Dynamic image (bool)",
+      "default": "0",
+      "type": "number",
+      "minValue": 0,
+      "maxValue": 1
+    }
+  ]
+}
