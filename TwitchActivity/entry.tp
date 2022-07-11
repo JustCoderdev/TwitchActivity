@@ -1,6 +1,6 @@
 {
-  "sdk": 3,
-  "version": 1,
+  "sdk": 6,
+  "version": 2,
   "name": "Twitch Activity",
   "id": "com.github.justcoderdev.twitchactivity",
   "configuration": {
@@ -61,6 +61,7 @@
           "type": "choice",
           "desc": "Refresh state",
           "default": "idle",
+          "parentGroup": "Twitch Activity",
           "valueChoices": [
             "refresh",
             "idle",
@@ -71,7 +72,8 @@
           "id": "com.github.justcoderdev.twitchactivity.state.time_until_refresh",
           "type": "text",
           "desc": "Time until refresh",
-          "default": "600"
+          "default": "600",
+          "parentGroup": "Twitch Activity"
         }
       ]
     }
@@ -90,7 +92,7 @@
     },
     {
       "name": "Dynamic image (bool)",
-      "default": "0",
+      "default": "1",
       "type": "number",
       "minValue": 0,
       "maxValue": 1

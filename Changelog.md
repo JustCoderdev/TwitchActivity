@@ -6,9 +6,27 @@ Here there is going to be the changelog of the new versions of the plugin
 
 ## [Released]
 
-## [1.0.0] - 2022.07.09 | 'Release'
+## [1.0.0] - 2022.07.09 | Release
 
 All of the basic features on the plugin
+
+## [1.0.1] - 2022.07.09 | Minor fixes
+
+### Added
+
+- Refresh button example in [helpers](./helpers/touchportal/buttons)
+
+### Changed
+
+- Sdk version change from 3 to 6 to group `refresh_state` and `time_until_refresh` states under the name of `Twitch Activity` throughout Touch Portal menus
+
+- Default value for `Dynamic image (bool)` from false (0) to true (1)
+- To avoid problem and misunderstandings any patch is going to add a version to the plugin, so now it's on version 2 🎉
+
+### Fixed
+
+- Logging event exposing `CLIENT-SECRET` and `CLIENT-ID` of Twitch API now removed
+- On the showcase page, the refresh button was colored red every time it was updated instead of green
 
 <!-- ## [Unreleased] -->
 
@@ -24,4 +42,5 @@ All of the basic features on the plugin
 
 <!-- [unreleased]: https://github.com/JustCoderdev/TwitchActivity -->
 
-[1.0.0]: https://github.com/JustCoderdev/TwitchActivity/tree/
+[1.0.0]: https://github.com/JustCoderdev/TwitchActivity/tree/d5b02548cd3f141b0994c05cfed2e136c222fb90
+[1.0.1]: https://github.com/JustCoderdev/TwitchActivity/tree/

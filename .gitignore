@@ -1,2 +1,4 @@
 .vscode/
 env.py
+temp/
+index.spec
