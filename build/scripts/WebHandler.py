@@ -6,12 +6,11 @@ from io import BytesIO
 from PIL import Image
 
 #* DEBUG
-from logging import DEBUG, basicConfig, info
+from logging import INFO, basicConfig, info
 
 
 open('.\log.txt', 'w').write('')
-
-basicConfig(filename='.\log.txt', level=DEBUG)
+basicConfig(filename='.\log.txt', level=INFO)
 
 
 def log(msg: str):
