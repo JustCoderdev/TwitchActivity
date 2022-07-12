@@ -10,7 +10,7 @@ Here there is going to be the changelog of the new versions of the plugin
 
 All of the basic features on the plugin
 
-## [1.0.1] - 2022.07.09 | Minor fixes
+## [1.0.1] - 2022.07.11 | Minor fixes
 
 ### Added
 
@@ -28,8 +28,18 @@ All of the basic features on the plugin
 - Logging event exposing `CLIENT-SECRET` and `CLIENT-ID` of Twitch API now removed
 - On the showcase page, the refresh button was colored red every time it was updated instead of green
 
-<!-- ## [Unreleased] -->
+## [1.0.2] - 2022.07.12 | Less crashes
 
+### Added
+
+- When entering the list in `Channel Names` it now automatically removes spaces to avoid errors or missing data
+
+### Fixed
+
+- Data in title of previous version now is the correct one
+- API requests should now no longer crash the plugin
+
+<!-- ## [Unreleased] -->
 <!--
 ### Added
 ### Changed
@@ -43,4 +53,5 @@ All of the basic features on the plugin
 <!-- [unreleased]: https://github.com/JustCoderdev/TwitchActivity -->
 
 [1.0.0]: https://github.com/JustCoderdev/TwitchActivity/tree/d5b02548cd3f141b0994c05cfed2e136c222fb90
-[1.0.1]: https://github.com/JustCoderdev/TwitchActivity/tree/
+[1.0.1]: https://github.com/JustCoderdev/TwitchActivity/tree/d4de7b5ebb64ea9d45755294f22e8d6bb2cf3b4a
+[1.0.2]: https://github.com/JustCoderdev/TwitchActivity/tree/

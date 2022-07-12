@@ -8,7 +8,7 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 
 1. Import the plugin from the release section on [github](https://github.com/JustCoderdev/TwitchActivity/releases)
 2. Go to the plugin settings and change `Channel names` to the names of your followed channels and if you need adjust the refresh time (enter the time in minutes)
-   > NOTE: `Channel names` **must** be formatted like it is by default (MonikaCinnyRoll,xSgtPepperx) without spaces and separated by a `,` (capital letters have no influence over the functioning of the plugin but you can change it for esthetic) and contain up to 100 channels (the last one are going to be ignored)
+   > NOTE: `Channel names` **must** be formatted like it is by default (MonikaCinnyRoll,xSgtPepperx)without spaces (otherwise it will automatically remove them) and separated by a `,` (capital letters have no influence over the functioning of the plugin but you can change it for esthetic) and contain up to 100 channels (the last one are going to be ignored)
 3. Import a simple button from `helpers/touchportal`
 4. Go to the button GUI and change `Open stream` action field to your channel name
 5. Press the `On Event` tab and change the value in `Update Button text...` from `${value:com.github.justcoderdev.twitchactivity.state.xSgtPepperx.viewers}` to `${value:com.github.justcoderdev.twitchactivity.state.YOURCHANNELNAME.viewers}` and `Change the icon...` from `xSgtPepperx icon` to `YOURCHANNELNAME icon`

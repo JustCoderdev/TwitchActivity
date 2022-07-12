@@ -54,7 +54,7 @@ def updateSettings(data):
 
     # Update settings
     REFRESH['time'] = int(data[1]['Refresh Time (m)'])
-    CHANNELS = data[0]['Channel names'].split(',')[:100]
+    CHANNELS = data[0]['Channel names'].replace(' ', '').split(',')[:100]
     DYNAMIC = True if data[2]['Dynamic image (bool)'] == '1' else False
 
     # Create new states
