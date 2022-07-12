@@ -123,8 +123,7 @@ class Twitch:
 
         try:
             res = get(f'https://api.twitch.tv/helix/streams?{query[1:]}', headers={'Authorization': f'Bearer {self._TOKEN}', 'Client-Id': self._CLIENT_ID}).json()
-            err = {'error': 'Bad Request', 'status': 400, 'message': 'Malformed query params.'}
-            return None if res == err else res
+            return None if res.get('data') == None else res
         except ConnectionError:
             isOnline = False
 
@@ -142,8 +141,7 @@ class Twitch:
 
         try:
             res = get(f'https://api.twitch.tv/helix/users?{query[1:]}', headers={'Authorization': f'Bearer {self._TOKEN}', 'Client-Id': self._CLIENT_ID}).json()
-            err = {'error': 'Bad Request', 'status': 400, 'message': 'Invalid login names, emails or IDs in request'}
-            return None if res == err else res
+            return None if res.get('data') == None else res
         except ConnectionError:
             isOnline = False
 
@@ -159,12 +157,10 @@ def getChannelUserData(usersData: list, channel: str) -> dict:
         'defIcon': None,
     }
 
-    for i in range(len(usersData)):
-        userData = usersData[i]
-
+    for userData in usersData:
         if userData['login'] == channel.lower():
             output['display_name'] = userData['display_name']
-            output['defIcon'] = getDefImage(getImgBytesFromUrl(userData['profile_image_url']))
+            output['defIcon'] = getDefImage(userData['profile_image_url'])
             return output
 
     return output
@@ -176,9 +172,7 @@ def getChannelStreamData(streamsData: list, channel: str) -> dict:
         'cViewers': '',
     }
 
-    for i in range(len(streamsData)):
-        streamData = streamsData[i]
-
+    for streamData in streamsData:
         if streamData['user_login'] == channel.lower():
             output['cState'] = 'Offline' if streamData['type'] == '' else 'Online'
             output['cViewers'] = str(streamData['viewer_count'])
@@ -187,20 +181,16 @@ def getChannelStreamData(streamsData: list, channel: str) -> dict:
     return output
 
 
-def getImgBytesFromUrl(imgURL: str) -> bytes | None:
-    global isOnline, newStates
+def getDefImage(imgURL: str) -> str | None:
+    global isOnline
 
     if not isOnline: return None
 
     try:
-        return get(imgURL).content
+        imgBytes = get(imgURL).content
     except ConnectionError:
         isOnline = False
         return None
-
-
-def getDefImage(imgBytes: bytes) -> str | None:
-    if imgBytes == None: return None
 
     #!#
     imgDef = Image.open(BytesIO(imgBytes))
