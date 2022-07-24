@@ -39,6 +39,17 @@ All of the basic features on the plugin
 - Data in title of previous version now is the correct one
 - API requests should now no longer crash the plugin
 
+## [1.0.3] - 2022.07.14 | Visual improvement and fixed start crash
+
+### Added
+- When the settings are updating the counter is set to `x`
+- Added a blank icon to help TP to 'refresh' the visual 
+
+### Fixed
+- On startup, if offline, the plugin should no longer crash and will set up channels once it is online
+- In the helpers the icon didn't update because the default one wasn't nothing and it covered the plug-in icon being on a higher level
+
+
 <!-- ## [Unreleased] -->
 <!--
 ### Added
@@ -54,4 +65,5 @@ All of the basic features on the plugin
 
 [1.0.0]: https://github.com/JustCoderdev/TwitchActivity/tree/d5b02548cd3f141b0994c05cfed2e136c222fb90
 [1.0.1]: https://github.com/JustCoderdev/TwitchActivity/tree/d4de7b5ebb64ea9d45755294f22e8d6bb2cf3b4a
-[1.0.2]: https://github.com/JustCoderdev/TwitchActivity/tree/
+[1.0.2]: https://github.com/JustCoderdev/TwitchActivity/tree/63585f733113ce215415e845e96538d5620764fa
+[1.0.3]: https://github.com/JustCoderdev/TwitchActivity/tree/

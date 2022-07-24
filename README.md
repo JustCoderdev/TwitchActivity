@@ -25,10 +25,11 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 
 ### States
 
-| Id                        | Description        | DefaultValue | parentGroup |
-| ------------------------- | ------------------ | ------------ | ----------- |
-| .state.refresh_state      | Refresh state      | idle         |             |
-| .state.time_until_refresh | Time until refresh | 600          |             |
+| Id                        | Description        | DefaultValue      | parentGroup     |
+| ------------------------- | ------------------ | ----------------- | --------------- |
+| .state.refresh_state      | Refresh state      | idle              | Twitch Activity |
+| .state.time_until_refresh | Time until refresh | 600               | Twitch Activity |
+| .state.blank_icon         | Blank icon         | _b64 blank Image_ | Twitch Activity |
 
 ### Events
 
