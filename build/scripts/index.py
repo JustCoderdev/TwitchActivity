@@ -13,36 +13,45 @@ DYNAMIC: bool = False
 
 isRunning: bool = True
 isOnline: bool = True
+hasSetted = False
 
 #!#
 TP = Client(ID)
 
+
 #*#
 def updateStates(set: bool = False):
-    global ID, CHANNELS, DYNAMIC, isOnline
+    global ID, CHANNELS, DYNAMIC, isOnline, hasSetted
 
     isOnline = checkOnline()
 
     if isOnline:
-        TP.stateUpdate(f'{ID}.state.refresh_state', 'refresh')
+        if hasSetted:
+            TP.stateUpdate(f'{ID}.state.refresh_state', 'refresh')
 
-        infos:list = getChannelsInfo(CHANNELS, set)
-        for info in infos:
-            icon:str = info['defIcon'] if info['cState'] == 'Online' else getGrayImage(info['defIcon']) if DYNAMIC else info['defIcon']
+            infos: list = getChannelsInfo(CHANNELS, set)
+            for info in infos:
+                icon: str = info['defIcon'] if info['cState'] == 'Online' else getGrayImage(info['defIcon']) if DYNAMIC else info['defIcon']
 
-            TP.stateUpdateMany([
-                {'id': f'{ID}.state.{info["display_name"]}.state', 'value': info['cState']},      # Update state state
-                {'id': f'{ID}.state.{info["display_name"]}.icon', 'value': icon},                 # Update icon state
-                {'id': f'{ID}.state.{info["display_name"]}.viewers', 'value': info['cViewers']},  # Update viewers state
-            ]) # yapf: disable
+                TP.stateUpdateMany([
+                    {'id': f'{ID}.state.{info["display_name"]}.state', 'value': info['cState']},      # Update state state
+                    {'id': f'{ID}.state.{info["display_name"]}.icon', 'value': icon},                 # Update icon state
+                    {'id': f'{ID}.state.{info["display_name"]}.viewers', 'value': info['cViewers']},  # Update viewers state
+                ]) # yapf: disable
 
-        TP.stateUpdate(f'{ID}.state.refresh_state', 'idle')
+            TP.stateUpdate(f'{ID}.state.refresh_state', 'idle')
+        else:
+            hasSetted = True
+            updateSettings([], True)
+
     else:
         TP.stateUpdate(f'{ID}.state.refresh_state', 'connection error')
 
 
-def updateSettings(data):
-    global ID, REFRESH, CHANNELS, DYNAMIC
+def updateSettings(data:list, noData:bool = False):
+    global ID, REFRESH, CHANNELS, DYNAMIC, isOnline, hasSetted
+
+    TP.stateUpdate(f'{ID}.state.time_until_refresh', 'x')
 
     # Remove old states
     for channel in CHANNELS:
@@ -53,9 +62,10 @@ def updateSettings(data):
         ]) # yapf: disable
 
     # Update settings
-    REFRESH['time'] = int(data[1]['Refresh Time (m)'])
-    CHANNELS = data[0]['Channel names'].replace(' ', '').split(',')[:100]
-    DYNAMIC = True if data[2]['Dynamic image (bool)'] == '1' else False
+    if not noData:
+        REFRESH['time'] = int(data[1]['Refresh Time (m)'])
+        CHANNELS = data[0]['Channel names'].replace(' ', '').split(',')[:100]
+        DYNAMIC = True if data[2]['Dynamic image (bool)'] == '1' else False
 
     # Create new states
     for channel in CHANNELS:
@@ -64,7 +74,7 @@ def updateSettings(data):
             {'id': f'{ID}.state.{channel}.icon', 'desc': f'{channel} icon', 'value': '', 'parentGroup': channel},           # Create icon state
             {'id': f'{ID}.state.{channel}.viewers', 'desc': f'{channel} viewers', 'value': '0', 'parentGroup': channel}     # Create viewers state
         ]) # yapf: disable
-
+        
     updateStates(True)
 
 
