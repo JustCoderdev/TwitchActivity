@@ -4,7 +4,7 @@ A plugin for [Touch Portal](https://www.touch-portal.com/) to have information a
 
 Here there is going to be the changelog of the new versions of the plugin
 
-## [Released]
+## [Released][released]
 
 ## [1.0.0] - 2022.07.09 | Release
 
@@ -42,13 +42,26 @@ All of the basic features on the plugin
 ## [1.0.3] - 2022.07.14 | Visual improvement and fixed start crash
 
 ### Added
+
 - When the settings are updating the counter is set to `x`
-- Added a blank icon to help TP to 'refresh' the visual 
+- Added a blank icon to help TP to 'refresh' the visual
 
 ### Fixed
+
 - On startup, if offline, the plugin should no longer crash and will set up channels once it is online
 - In the helpers the icon didn't update because the default one wasn't nothing and it covered the plug-in icon being on a higher level
 
+## [1.1.0] - 2022.09.21 | Icon folder
+
+### Added
+
+- Log helper and a clean look to the log file (more info in the README under EXTRA section)
+
+### Changed
+
+- Updated the README to include the new functions
+- New folder added to the plugin called `utils` that contains the log file and the logo of the plugin
+- New folder called `Icons` that collects all of the used icon by the plugins to allow customization and reduce fetch time on start
 
 <!-- ## [Unreleased] -->
 <!--
@@ -66,4 +79,5 @@ All of the basic features on the plugin
 [1.0.0]: https://github.com/JustCoderdev/TwitchActivity/tree/d5b02548cd3f141b0994c05cfed2e136c222fb90
 [1.0.1]: https://github.com/JustCoderdev/TwitchActivity/tree/d4de7b5ebb64ea9d45755294f22e8d6bb2cf3b4a
 [1.0.2]: https://github.com/JustCoderdev/TwitchActivity/tree/63585f733113ce215415e845e96538d5620764fa
-[1.0.3]: https://github.com/JustCoderdev/TwitchActivity/tree/
+[1.0.3]: https://github.com/JustCoderdev/TwitchActivity/tree/79fe641c2a4aafadd0e475d0a9108062c80480a1
+[1.1.0]: https://github.com/JustCoderdev/TwitchActivity/tree/

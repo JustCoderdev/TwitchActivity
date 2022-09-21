@@ -7,21 +7,35 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 ## Quick Setup
 
 1. Import the plugin from the release section on [github](https://github.com/JustCoderdev/TwitchActivity/releases)
-2. Go to the plugin settings and change `Channel names` to the names of your followed channels and if you need adjust the refresh time (enter the time in minutes)
-   > NOTE: `Channel names` **must** be formatted like it is by default (MonikaCinnyRoll,xSgtPepperx)without spaces (otherwise it will automatically remove them) and separated by a `,` (capital letters have no influence over the functioning of the plugin but you can change it for esthetic) and contain up to 100 channels (the last one are going to be ignored)
+2. Go to the plugin settings and change `Channel names` to the names of your followed channels and, if you need, adjust the refresh time (enter the time in minutes)
+   > NOTE: `Channel names` **must** be formatted like this (MonikaCinnyRoll,xSgtPepperx) and separated by `,` (capital letters and spaces have no influence over the functioning of the plugin) and contain up to 100 channels (the extra ones are just going to be ignored)
 3. Import a simple button from `helpers/touchportal`
-4. Go to the button GUI and change `Open stream` action field to your channel name
+4. Go to the button GUI and change `Open stream` action field to any channel name (doesn't need to be one from `Channel names`, anyone is fine)
 5. Press the `On Event` tab and change the value in `Update Button text...` from `${value:com.github.justcoderdev.twitchactivity.state.xSgtPepperx.viewers}` to `${value:com.github.justcoderdev.twitchactivity.state.YOURCHANNELNAME.viewers}` and `Change the icon...` from `xSgtPepperx icon` to `YOURCHANNELNAME icon`
 6. Done! Now you can customize this button as you wish, adding a shade of red when the connection is lost, showing 🔴 next to the viewers number, adding a default image to avoid having the blank icon in TP from the pc, showing the channel name, etc... (view the [FAQ](#faq) for more info)
+
+## Extra
+
+- Custom icons
+  > Use your own set of icons that can gray out and automatically be integrated with the plugin)
+  1. Wait until the plugin loads the `Icons` folder in `%APPDATA%\TouchPortal\plugins\TwitchActivity`
+  2. Drop your icons (in PNG format) in the folder and rename them like this `YOURCHANNELNAME.png` with `YOURCHANNELNAME` in lowercase (`yourchannelname.png`)
+  3. Done!
+
+- Read the Log
+  > The log file has a symbol before each action
+  - `!`: initialization process
+  - `?`: general information log
+  - `*`: update on the states
 
 ## Plugin features
 
 ### Actions
 
-| Action Name | Description                                              | Format          | Data                                       | On Hold |
-| ----------- | -------------------------------------------------------- | --------------- | ------------------------------------------ | :-----: |
-| Refresh     | This action will refresh the channels states             |                 |                                            |   No    |
-| Open stream | This action will open selected channel stream in browser | Open [1] stream | 1. Type: text &nbsp; Default: **ImKibitz** |   No    |
+| Action Name | Description                                              | Format           | Data                                       | On Hold |
+| ----------- | -------------------------------------------------------- | ---------------- | ------------------------------------------ | :-----: |
+| Refresh     | This action will refresh the channels states             |                  |                                            |   No    |
+| Open stream | This action will open selected channel stream in browser | Open \[1] stream | 1. Type: text &nbsp; Default: **ImKibitz** |   No    |
 
 ### States
 
@@ -30,6 +44,14 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 | .state.refresh_state      | Refresh state      | idle              | Twitch Activity |
 | .state.time_until_refresh | Time until refresh | 600               | Twitch Activity |
 | .state.blank_icon         | Blank icon         | _b64 blank Image_ | Twitch Activity |
+
+### Streamer Specific States
+
+| Id                               | Description               | DefaultValue | parentGroup       |
+| -------------------------------- | ------------------------- | ------------ | ----------------- |
+| .state.`YOURCHANNELNAME`.state   | `YOURCHANNELNAME` state   | Offline      | `YOURCHANNELNAME` |
+| .state.`YOURCHANNELNAME`.icon    | `YOURCHANNELNAME` icon    | ''           | `YOURCHANNELNAME` |
+| .state.`YOURCHANNELNAME`.viewers | `YOURCHANNELNAME` viewers | 0            | `YOURCHANNELNAME` |
 
 ### Events
 
@@ -59,7 +81,7 @@ The viewers count if the channel is offline it's a simple empty string (`''`) el
 
 ## Error handling
 
-In case the countdown doesn't tick anymore, the plugin has crashed, try reloading TP or just stop and restart the plugin. If the problem persists contact me (info below)
+In case the countdown doesn't tick anymore, the plugin has crashed, try reloading TP or just stop and restart the plugin. If the problem persists [contact me](#Notes)
 
 If, when adding a new streamer, its icon is not displayed and after TP restarts none of the plugin icons are displayed there may be a space in the `Channel names` setting
 

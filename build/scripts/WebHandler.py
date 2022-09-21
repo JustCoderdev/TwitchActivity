@@ -2,6 +2,7 @@ from requests import post, get, ConnectionError
 from env import CLIENT_ID, CLIENT_SECRET
 from base64 import b64decode, b64encode
 from webbrowser import open as browse
+from os import mkdir, path
 from io import BytesIO
 from PIL import Image
 
@@ -9,8 +10,8 @@ from PIL import Image
 from logging import INFO, basicConfig, info
 
 
-open('.\log.txt', 'w').write('')
-basicConfig(filename='.\log.txt', level=INFO)
+open('./utils/log.txt', 'w').write('')
+basicConfig(filename='./utils/log.txt', level=INFO)
 
 
 def log(msg: str):
@@ -30,11 +31,11 @@ def checkOnline():
 
     try:
         get('https://www.twitch.tv/')
-        log('Check online | True')
+        log('? Check online | True')
         isOnline = True
         return True
     except ConnectionError:
-        log('Check online | False')
+        log('? Check online | False')
         isOnline = False
         return False
 
@@ -47,16 +48,30 @@ def getChannelsInfo(channels: list[str], set: bool = False) -> list:
     global CHANNELS
 
     if set:
-        log(f'Settings channels | {channels}')
+        log(f'! Setting data | {channels}')
 
-        usersDataApi = API.getUsers(channels)
+        #? Check available icons
+        if not path.exists('./Icons'): mkdir("./Icons")
+        noIconUsers: list = []
+
+        for channel in channels:
+            if not path.exists(f"./Icons/{channel.lower()}.png"): noIconUsers.append(channel)
+
+        if len(noIconUsers) != 0:
+            noIconUsersDataApi = API.getUsers(noIconUsers)
+            noIconUsersData = [] if noIconUsersDataApi == None else noIconUsersDataApi['data']
+
+            for noIconUser in noIconUsers:
+                userData = getChannelUserData(noIconUsersData, noIconUser)
+                saveIcon(userData['defIcon'], noIconUser)
+
+            log(f"! New Icon for | {noIconUsers}")
+
         streamsDataApi = API.getStreams(channels)
-
-        usersData = [] if usersDataApi == None else usersDataApi['data']
         streamsData = [] if streamsDataApi == None else streamsDataApi['data']
 
         for channel in channels:
-            userData = getChannelUserData(usersData, channel)
+            userData = {'display_name': channel, 'defIcon': getIcon(channel)}
             streamData = getChannelStreamData(streamsData, channel)
 
             CHANNELS[channel.lower()] = {
@@ -67,7 +82,7 @@ def getChannelsInfo(channels: list[str], set: bool = False) -> list:
             } # yapf: disable
 
     else:
-        log(f'Updating channels | {channels}')
+        log(f'* Updated data | {channels}')
 
         streamsDataApi = API.getStreams(channels)
         streamsData = [] if streamsDataApi == None else streamsDataApi['data']
@@ -94,7 +109,7 @@ class Twitch:
     _TOKEN: str = ''
 
     def __init__(self, client_id: str, client_secret: str):
-        log('Twitch initialization')
+        log('! Twitch initialization')
         self._CLIENT_ID = client_id
         self._CLIENT_SECRET = client_secret
         self._newToken()
@@ -224,3 +239,36 @@ def getGrayImage(b64Image: str) -> str | None:
     imgGrayB64 = b64encode(buffered.getvalue()).decode('ascii')
 
     return imgGrayB64
+
+
+    # b64Image = userData['defIcon']
+def saveIcon(b64Image: str, channel: str) -> None:
+    if not path.exists('./Icons'): mkdir("./Icons")
+    if b64Image == None: return
+
+    with open(f"./Icons/{channel.lower()}.png", "wb") as icon:
+        #? Convert to byte
+        imgBytes = b64decode(b64Image)
+
+        #? Convert to Image object
+        imgDef = Image.open(BytesIO(imgBytes))
+
+        #? Convert to PNG
+        buffered = BytesIO()
+        imgDef.save(buffered, format="PNG")
+
+        icon.write(buffered.getvalue())
+
+
+def getIcon(channel: str) -> str | None:
+    if not path.exists(f"./Icons/{channel.lower()}.png"): return None
+
+    #? Convert to Image object
+    imgDef = Image.open(f"./Icons/{channel.lower()}.png")
+
+    #? Convert to B64
+    buffered = BytesIO()
+    imgDef.save(buffered, format="PNG")
+    imgB64 = b64encode(buffered.getvalue()).decode('ascii')
+
+    return imgB64
