@@ -126,7 +126,7 @@ def onSettingUpdate(data):
 @TP.on(TYPES.onShutdown)
 def onShutdown(data):
     global uThread, isRunning
-
+    
     isRunning = False
     if uThread.is_alive(): uThread.join()
 

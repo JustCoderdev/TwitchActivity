@@ -63,6 +63,16 @@ All of the basic features on the plugin
 - New folder added to the plugin called `utils` that contains the log file and the logo of the plugin
 - New folder called `Icons` that collects all of the used icon by the plugins to allow customization and reduce fetch time on start
 
+## [1.1.1] - 2022.11.27 | Minor readme changes
+
+### Changed
+- previous `helper/` folder is now named "resources"
+- README is now more readable and updated to the latest version AND with images
+
+### Removed
+
+- Removed from Github all of the "from .py to .exe" scripts and config stuff
+
 <!-- ## [Unreleased] -->
 <!--
 ### Added
@@ -80,4 +90,5 @@ All of the basic features on the plugin
 [1.0.1]: https://github.com/JustCoderdev/TwitchActivity/tree/d4de7b5ebb64ea9d45755294f22e8d6bb2cf3b4a
 [1.0.2]: https://github.com/JustCoderdev/TwitchActivity/tree/63585f733113ce215415e845e96538d5620764fa
 [1.0.3]: https://github.com/JustCoderdev/TwitchActivity/tree/79fe641c2a4aafadd0e475d0a9108062c80480a1
-[1.1.0]: https://github.com/JustCoderdev/TwitchActivity/tree/
+[1.1.0]: https://github.com/JustCoderdev/TwitchActivity/tree/8db5453c9a2b8c283e0754204fc596cc851073fe
+[1.1.1]: https://github.com/JustCoderdev/TwitchActivity/tree/

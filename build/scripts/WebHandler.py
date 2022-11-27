@@ -1,10 +1,10 @@
 from requests import post, get, ConnectionError
-from env import CLIENT_ID, CLIENT_SECRET
 from base64 import b64decode, b64encode
 from webbrowser import open as browse
 from os import mkdir, path
 from io import BytesIO
 from PIL import Image
+from env import *
 
 #* DEBUG
 from logging import INFO, basicConfig, info
@@ -18,6 +18,8 @@ def log(msg: str):
     print(f'Twitch Activity: {msg}')
     info(f'Twitch Activity: {msg}')
 
+
+log(f'! Loading Twitch Activity plugin | v{VERSION}')
 
 #* DEBUG
 
@@ -104,23 +106,23 @@ def getChannelsInfo(channels: list[str], set: bool = False) -> list:
 
 
 class Twitch:
-    _CLIENT_ID: str = ''
-    _CLIENT_SECRET: str = ''
-    _TOKEN: str = ''
+    CLIENT_ID: str = ''
+    CLIENT_SECRET: str = ''
+    TOKEN: str = ''
 
     def __init__(self, client_id: str, client_secret: str):
         log('! Twitch initialization')
-        self._CLIENT_ID = client_id
-        self._CLIENT_SECRET = client_secret
-        self._newToken()
+        self.CLIENT_ID = client_id
+        self.CLIENT_SECRET = client_secret
+        self.newToken()
 
-    def _newToken(self):
+    def newToken(self):
         global isOnline
 
         if not isOnline: return None
 
         try:
-            self._TOKEN = post(f'https://id.twitch.tv/oauth2/token?client_id={self._CLIENT_ID}&client_secret={self._CLIENT_SECRET}&grant_type=client_credentials').json()['access_token']
+            self.TOKEN = post(f'https://id.twitch.tv/oauth2/token?client_id={self.CLIENT_ID}&client_secret={self.CLIENT_SECRET}&grant_type=client_credentials').json()['access_token']
         except ConnectionError:
             isOnline = False
 
@@ -137,7 +139,7 @@ class Twitch:
             query += f'&user_login={user}'
 
         try:
-            res = get(f'https://api.twitch.tv/helix/streams?{query[1:]}', headers={'Authorization': f'Bearer {self._TOKEN}', 'Client-Id': self._CLIENT_ID}).json()
+            res = get(f'https://api.twitch.tv/helix/streams?{query[1:]}', headers={'Authorization': f'Bearer {self.TOKEN}', 'Client-Id': self.CLIENT_ID}).json()
             return None if res.get('data') == None else res
         except ConnectionError:
             isOnline = False
@@ -155,7 +157,7 @@ class Twitch:
             query += f'&login={user}'
 
         try:
-            res = get(f'https://api.twitch.tv/helix/users?{query[1:]}', headers={'Authorization': f'Bearer {self._TOKEN}', 'Client-Id': self._CLIENT_ID}).json()
+            res = get(f'https://api.twitch.tv/helix/users?{query[1:]}', headers={'Authorization': f'Bearer {self.TOKEN}', 'Client-Id': self.CLIENT_ID}).json()
             return None if res.get('data') == None else res
         except ConnectionError:
             isOnline = False
@@ -240,8 +242,6 @@ def getGrayImage(b64Image: str) -> str | None:
 
     return imgGrayB64
 
-
-    # b64Image = userData['defIcon']
 def saveIcon(b64Image: str, channel: str) -> None:
     if not path.exists('./Icons'): mkdir("./Icons")
     if b64Image == None: return
