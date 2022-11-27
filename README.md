@@ -86,7 +86,7 @@ Open Stream, will open a new twitch.tv webpage of the entered channel to view th
 Dynamic image, if set to false (0), will make the `YOURCHANNELNAME icon` value be the default icon, instead, if it's setted to true (1), it will look at the status of the channel and set the icon to be colored if online or grayed out if offline
 
 <details><summary><h3 style="display:inline">What happen <code>On refresh state</code>?</h3></summary>
-
+<img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/refresh_states.png" height="200" />
 </details>
 
 - On `refresh` the plugin fetches new data from twitch and updates all states
