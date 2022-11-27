@@ -3,4 +3,4 @@ build/scripts/__pycache__
 build/scripts/env.py
 build/scripts/index.spec
 build/temp/
-helpers/tools/
+resources/api/

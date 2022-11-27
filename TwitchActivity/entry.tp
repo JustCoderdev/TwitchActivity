@@ -1,6 +1,6 @@
 {
   "sdk": 6,
-  "version": 5,
+  "version": 6,
   "name": "Twitch Activity",
   "id": "com.github.justcoderdev.twitchactivity",
   "configuration": {
