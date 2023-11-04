@@ -4,7 +4,7 @@ from webbrowser import open as browse
 from os import mkdir, path
 from io import BytesIO
 from PIL import Image
-from env import *
+from env import CLIENT_ID, CLIENT_SECRET, VERSION
 
 #* DEBUG
 from logging import INFO, basicConfig, info

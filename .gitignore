@@ -1,6 +1,4 @@
-.vscode/
 build/scripts/__pycache__
 build/scripts/env.py
 build/scripts/index.spec
 build/temp/
-resources/api/

@@ -6,31 +6,43 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 
 ## Quick Setup
 
-<details> <summary>1.  Download and import the plugin from the <a href="https://github.com/JustCoderdev/TwitchActivity/releases/latest">release</a> section (if the plugin get stuck in installation phase check <a href="#common-error-handling">error handling</a>)
-</summary> <img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/QuickSetup1.png" height="300" /> </details>
+<details><summary>1.  Download and import the plugin from the <a href="https://github.com/JustCoderdev/TwitchActivity/releases/latest">release</a> section (if it get's stuck during installation check <a href="#common-error-handling">handling errors</a>)
+</summary> <img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/QuickSetup1.png" height="300" />
+</details>
 
-1. Go to the plugin settings and change `Channel names` to the names of your the channels that you follow and, if you need, adjust the refresh time (in minutes)
-   > **NOTE**
-   >
-   > - `Channel names` **must** be formatted like this: `NAMEA,NAMEB,NAMEC` (es. MonikaCinnyRoll,xSgtPepperx) with `,` between the names and can contain up to 100 channels (if inserted more they will be ignored)
-   > - Capital letters and spaces have no influence over the functioning of the plugin but they can be added to capitalize a channel name
-2. Import a simple button from [`resources\touchportal\buttons\`](https://github.com/JustCoderdev/TwitchActivity/tree/main/resources/touchportal/buttons)
-3. Go to the button _On Pressed_ and change `Open stream` action field to any channel name (doesn't need to be one from `Channel names`, anyone is fine)
+2. Go to the plugin settings and change `Channel names` to the names of the channels that you follow and, if you need, adjust the refresh time (as minutes)
+   > [!NOTE]
+   > - `Channel names` **must** be formatted like: `NAMEA,NAMEB,NAMEC` (ex. MonikaCinnyRoll,xSgtPepperx) with `,` between the names and can contain up to 100 channels (if more are inserted, they will be ignored)
+   > - The Twitch API ignores capitalisation but you can use it to "prettify" the names
 
-<details> <summary>4. Go to <i>On Event</i> tab and change the value in <code>Update Button text...</code> from <code>${...state.xSgtPepperx.viewers}</code> to <code>${...state.YOURCHANNELNAME.viewers}</code> and <code>Change the icon...</code> from <code>xSgtPepperx icon</code> to <code>YOURCHANNELNAME icon</code>
+3. Import a simple button from [`resources\touchportal\buttons\`](https://github.com/JustCoderdev/TwitchActivity/tree/main/resources/touchportal/buttons)
+
+4. Go to the _On Pressed_ button and change `Open stream` action field to any channel name (doesn't need to be one from `Channel names`, anyone is fine)
+
+<details> <summary>5. Go to <i>On Event</i> tab and change the value in <code>Update Button text...</code> from <code>${...state.xSgtPepperx.viewers}</code> to <code>${...state.YOURCHANNELNAME.viewers}</code> and <code>Change the icon...</code> from <code>xSgtPepperx icon</code> to <code>YOURCHANNELNAME icon</code>
 </summary> <br> <img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/QuickSetup4.png" height="200" /> </details>
 
-5. Done! Now you can customize this button as you wish, adding a shade of red when the connection is lost, showing 🔴 next to the viewers number, adding a default image to avoid having the blank icon in TP from the pc, showing the channel name, etc... (view the [FAQ](#faq) for more info)
+5. Done! Now you can customize this button as you wish like:
+      - Adding a shade of red when the connection is lost
+      - Showing 🔴 next to the viewers number
+      - Adding a default image to avoid a blank icon (on desktop app)
+      - Showing the channel name
+      - etc...
+
+_view the [FAQ](#faq) for more info_
 
 ## Extra
 
 <details> <summary>Setting custom icons</summary>
 <img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/custom_icons.png" height="250" /></details>
 
-> Integrated your own set of icons with the plugin that can be grayed out automatically)
+> Integrate your own set of icons with the plugin (they can even be grayed out automatically!)
 
-1. Wait until the plugin loads the default icons in the `icons\` folder in the plugin directory (see below)
-2. Remove the default icons and move your own (in PNG format) in the folder and rename them like this: `YOURCHANNELNAME.png` with `YOURCHANNELNAME` in lowercase (es. monikacinnyroll.png)
+1. After installation wait until the plugin loads all the default icons inside the `icons\` folder in the plugin directory (see below)
+2. Remove the default icons and move your own in the folder
+   > [!NOTE]
+   > - The icons **must** be PNGs and preferably squared
+   > - The icon name **must** be written as `YOURCHANNELNAME.png` with `YOURCHANNELNAME` in lowercase (ex. monikacinnyroll.png)
 3. Done! If it doesn't show instantly don't worry, just restart the desktop and mobile app and it should set correctly or just wait until TP update itself
 
 - Reading the Logs
@@ -39,10 +51,12 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 
   - `!`: initialization process
   - `?`: general information log
-  - `*`: update on the states
+  - `*`: states update
 
 - Find the plugin directory
   - The plugin directory should be here: `%APPDATA%\TouchPortal\plugins\TwitchActivity\`
+
+- The plugin id is `com.github.justcoderdev.twitchactivity`
 
 ## Plugin features
 
@@ -77,38 +91,42 @@ This documentation is partially generated with [Python TouchPortal SDK](https://
 
 ## FAQ
 
-### - What `Open stream` does?
+### - What does `Open stream` do?
 
-Open Stream, will open a new twitch.tv webpage of the entered channel to view the live
+Open Stream, will open a new twitch.tv webpage to open the channel live
 
-<details><summary><h3 style="display:inline">What <code>Dynamic image</code> does?</h3></summary><img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/online_offline.png" height="200" /></details>
+<details><summary><h3 style="display:inline">What does the <code>Dynamic image</code> setting do?</h3></summary><img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/online_offline.png" height="200" /></details>
 
-Dynamic image, if set to false (0), will make the `YOURCHANNELNAME icon` value be the default icon, instead, if it's setted to true (1), it will look at the status of the channel and set the icon to be colored if online or grayed out if offline
+- If set to `false` (`0`)
+The icon the plugin will provide (contained in `YOURCHANNELNAME icon` value) is going to be the default channel icon (or the provided icon in the `icons\` folder)
+
+- If set to `true` (`1`)
+The icon will react to the state of the channel. The icon will remain the default when the channel is live, however, when the channel is offline the icon will be grayed out
 
 <details><summary><h3 style="display:inline">What happen <code>On refresh state</code>?</h3></summary>
 <img src="https://github.com/JustCoderdev/TwitchActivity/blob/main/resources/images/refresh_states.png" height="200" />
 </details>
 
-- On `refresh` the plugin fetches new data from twitch and updates all states
+- On `refresh` the plugin fetches new data from Twitch and updates all states
 - On `idle` the plugin is just sitting there, chilling, until the countdown reaches 0 to update it's states
 - On `connection error` the plugin detected a connection error and, when the problem goes away, the plugin will continue to work as intended
 
 ### - In which format is the `viewers count` shown?
 
-The viewers count if the channel is offline it's a simple empty string (`''`) else it's the actual number of viewers (ex. `'248'`)
+The viewers count, if the channel is offline, it's a simple empty string (`''`) otherwise it's the actual number of viewers (ex. `'248'`)
 
 ## Common Error handling
 
-In case the countdown doesn't tick anymore, the plugin crashed, try reloading TP or just stop and restart the plugin. If the problem persists [contact me](#Notes)
+In case the countdown doesn't tick anymore, the plugin probably crashed, try reloading TP or just stop and restart the plugin. If the problem persists [contact me](##Notes)
 
-In case your PC stays on for weeks (hope not), the plugin may stop fetching data and give connection error even if connected to the internet. Just reload the plugin or restart TP and it should update Twitch access token therefor working as intended
+In case your PC stays on for weeks (hope not), the plugin may stop fetching data and give a connection error even if it has connection to internet. Reload the plugin or restart TP to update the Twitch access token
 
 If, during installation, the plugin get stuck and the slider don't move try to install the plugin manually:
 
 1. Rename `TwitchActivity.tpp` to `TwitchActivity.zip` and unzip it
 2. Move the unzipped folder in `%Appdata%\touchportal\plugins\` and restart TP
 
-# Notes
+## Notes
 
 In case there are bugs or you need support contact me on [Touch Portal discord](https://discord.gg/mXWvEUczEK)
 

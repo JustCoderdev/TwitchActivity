@@ -1,0 +1,32 @@
+[
+  //? onConnect
+  {
+    "settings": [{ "Channel names": "xSgtPepperx,MonikaCinnyRoll" }, { "Refresh Time (m)": "10" }],
+    "tpVersionString": "3.1.1.0.0",
+    "pluginVersion": 1,
+    "tpVersionCode": 301001,
+    "sdkVersion": 6,
+    "type": "info",
+    "status": "paired"
+  },
+
+  //? onSettingUpdate
+  {
+    "values": [{ "Channel names": "xSgtPepperx,MonikaCinnyRoll" }, { "Refresh Time (m)": "20" }],
+    "type": "settings"
+  },
+
+  //? onShutdown
+  {
+    "pluginId": "com.github.justcoderdev.twitchactivity",
+    "type": "closePlugin"
+  },
+
+  //? onActions
+  {
+    "data": [{ "id": "com.github.justcoderdev.twitchactivity.data.channel", "value": "ImKibitz" }],
+    "pluginId": "com.github.justcoderdev.twitchactivity",
+    "actionId": "com.github.justcoderdev.twitchactivity.act.open_stream",
+    "type": "action"
+  }
+]

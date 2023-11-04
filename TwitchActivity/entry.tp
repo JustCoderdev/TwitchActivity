@@ -1,6 +1,6 @@
 {
   "sdk": 6,
-  "version": 6,
+  "version": 7,
   "name": "Twitch Activity",
   "id": "com.github.justcoderdev.twitchactivity",
   "configuration": {
@@ -16,7 +16,7 @@
       "actions": [
         {
           "id": "com.github.justcoderdev.twitchactivity.act.refresh",
-          "prefix": " ",
+          "prefix": "Twitch Activity",
           "name": "Refresh",
           "type": "communicate",
           "description": "This action will refresh the channels states",
@@ -24,7 +24,7 @@
         },
         {
           "id": "com.github.justcoderdev.twitchactivity.act.open_stream",
-          "prefix": " ",
+          "prefix": "Twitch Activity",
           "name": "Open stream",
           "type": "communicate",
           "description": "This action will open selected channel stream in browser",
