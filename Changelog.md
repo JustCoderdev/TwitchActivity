@@ -11,7 +11,8 @@ Here there is going to be the changelog of the new versions of the plugin
 ### Changed
 
 - Rewritten and updated README
-- Changed the `Refresh` and `Open Stream` actions to include the plugin name in the prefix
+- Flag to support for v4
+- Changed `Refresh`, `Open Stream` and `on` verbage to include the plugin name
 
 <!-- ### Deprecated -->
 <!-- ### Removed -->

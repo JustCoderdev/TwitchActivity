@@ -44,7 +44,7 @@
         {
           "id": "com.github.justcoderdev.twitchactivity.event.on_refresh_state",
           "name": "On refresh state",
-          "format": "On $val",
+          "format": "TwitchActivity on $val",
           "type": "communicate",
           "valueType": "choice",
           "valueChoices": [
